@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Apartment Details | KrakówLux</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/feather-icons"></script>
+        <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+        <style>
+            .apartment-gallery {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 300px);
+                gap: 1rem;
+            }
+
+            .gallery-main {
+                grid-column: span 2;
+                grid-row: span 2;
+            }
+
+            @media (max-width: 768px) {
+                .apartment-gallery {
+                    grid-template-columns: 1fr;
+                    grid-template-rows: auto;
+                }
+
+                .gallery-main {
+                    grid-column: span 1;
+                    grid-row: span 1;
+                }
+            }
+
+            .amenity-item {
+                display: flex;
+                align-items: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #e5e7eb;
+            }
+
+            .booking-calendar {
+                border: 1px solid #e5e7eb;
+                border-radius: 0.5rem;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+
+    <body class="font-sans bg-gray-50">
+        <!-- Navigation -->
+        <nav class="bg-white shadow-sm fixed w-full z-50 py-4 px-6 md:px-12">
+            <div class="flex justify-between items-center">
+                <div class="md:hidden">
+                    <button class="text-gray-800 focus:outline-none">
+                        <i data-feather="menu"></i>
+                    </button>
+                </div>
+
+                <div class="mx-auto md:mx-0">
+                    <a href="index.html" class="text-3xl font-bold text-gray-800">
+                        <span class="text-blue-600">Kraków</span>Lux
+                    </a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-800 hover:text-blue-600">Home</a>
+                    <a href="index.html#apartments" class="text-gray-800 hover:text-blue-600">Apartments</a>
+                    <a href="index.html#about" class="text-gray-800 hover:text-blue-600">About</a>
+                    <a href="index.html#contact" class="text-gray-800 hover:text-blue-600">Contact</a>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="text-gray-800 hover:text-blue-600"><i data-feather="instagram"></i></a>
+                    <a href="#" class="text-gray-800 hover:text-blue-600"><i data-feather="facebook"></i></a>
+                    <button
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition duration-300">
+                        Book Now
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Apartment Header -->
+        <div class="pt-20 pb-12 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end">
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Royal Apartment</h1>
+                        <div class="flex items-center text-gray-600">
+                            <i data-feather="map-pin" class="w-4 h-4 mr-2"></i>
+                            <span>Old Town, Kraków</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        <div class="flex items-center">
+                            <div class="flex mr-4">
+                                <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                            </div>
+                            <span class="text-gray-600">24 reviews</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Apartment Gallery -->
+        <div class="container mx-auto px-6 mb-12">
+            <div class="apartment-gallery">
+                <div class="gallery-main rounded-xl overflow-hidden">
+                    <img src="http://static.photos/interior/800x600/1" alt="Royal Apartment"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden">
+                    <img src="http://static.photos/interior/600x400/2" alt="Royal Apartment"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden">
+                    <img src="http://static.photos/interior/600x400/3" alt="Royal Apartment"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden">
+                    <img src="http://static.photos/interior/600x400/4" alt="Royal Apartment"
+                        class="w-full h-full object-cover">
+                </div>
+                <div class="rounded-xl overflow-hidden">
+                    <img src="http://static.photos/interior/600x400/5" alt="Royal Apartment"
+                        class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Apartment Details -->
+        <div class="container mx-auto px-6 mb-16">
+            <div class="flex flex-col md:flex-row gap-12">
+                <!-- Main Content -->
+                <div class="md:w-2/3">
+                    <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">About this apartment</h2>
+                        <p class="text-gray-600 mb-6">
+                            The Royal Apartment is a beautifully designed space located in the heart of Kraków's Old
+                            Town, just steps away from the Main Market Square. This elegant apartment combines historic
+                            charm with modern comforts.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            With two comfortable bedrooms and a spacious living area, it's perfect for couples, families
+                            or small groups looking to experience the best of Kraków in style. The apartment features
+                            high ceilings, original architectural details, and carefully selected furnishings that
+                            create a warm and inviting atmosphere.
+                        </p>
+                        <p class="text-gray-600">
+                            The fully equipped kitchen allows you to prepare meals at home, while the comfortable living
+                            area is perfect for relaxing after a day of exploring the city. The bedrooms feature premium
+                            bedding to ensure a good night's sleep.
+                        </p>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Amenities</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="amenity-item">
+                                <i data-feather="wifi" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Free WiFi</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="tv" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Smart TV</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="coffee" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Coffee maker</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="wind" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Air conditioning</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="shower" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Hair dryer</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="lock" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Safe</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="utensils" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Fully equipped kitchen</span>
+                            </div>
+                            <div class="amenity-item">
+                                <i data-feather="home" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                <span class="text-gray-700">Washer</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-8 mb-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Location</h2>
+                        <p class="text-gray-600 mb-6">
+                            The apartment is located in the very center of Kraków's Old Town, just a 2-minute walk from
+                            the Main Market Square. You'll be surrounded by historic landmarks, excellent restaurants,
+                            and vibrant nightlife.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            Nearby attractions include Wawel Castle (10 min walk), the Jewish Quarter (15 min walk), and
+                            the Vistula River boulevards (5 min walk). Public transportation options are abundant, with
+                            tram and bus stops within a 5-minute walk.
+                        </p>
+                        <div class="rounded-xl overflow-hidden shadow-lg">
+                            <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.069140782804!2d19.93536931571536!3d50.06198337942418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b1aa3e418c3%3A0x61caab5b1033da73!2sRynek%20G%C5%82%C3%B3wny%205%2C%2031-042%20Krak%C3%B3w!5e0!3m2!1sen!2spl!4v1620000000000!5m2!1sen!2spl"
+                                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm p-8">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Guest Reviews</h2>
+                        <div class="space-y-8">
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                        <img src="http://static.photos/people/200x200/1" alt="Sarah M."
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Sarah M.</h4>
+                                        <p class="text-gray-500 text-sm">London, UK</p>
+                                    </div>
+                                    <div class="ml-auto flex">
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">
+                                    "The Royal Apartment exceeded all our expectations. The location was perfect, right
+                                    in the heart of the Old Town. The apartment was spacious, clean, and beautifully
+                                    decorated. We'll definitely be back!"
+                                </p>
+                            </div>
+
+                            <div>
+                                <div class="flex items-center mb-4">
+                                    <div class="w-10 h-10 rounded-full bg-gray-300 mr-4 overflow-hidden">
+                                        <img src="http://static.photos/people/200x200/2" alt="Michael T."
+                                            class="w-full h-full object-cover">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Michael T.</h4>
+                                        <p class="text-gray-500 text-sm">Berlin, Germany</p>
+                                    </div>
+                                    <div class="ml-auto flex">
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600">
+                                    "We stayed for a long weekend and couldn't have been happier with our choice. The
+                                    apartment is even nicer than the photos show, and the host was extremely helpful
+                                    with local recommendations. The location is unbeatable - right in the center but
+                                    still quiet at night."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Sidebar -->
+                <div class="md:w-1/3">
+                    <div class="bg-white rounded-xl shadow-sm p-6 sticky top-24">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <span class="text-gray-600">From</span>
+                                <span class="text-3xl font-bold text-gray-800 ml-2">€120</span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+                            <div class="flex space-x-2">
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">2 beds</span>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1 bath</span>
+                            </div>
+                        </div>
+
+                        <div class="booking-calendar mb-6">
+                            <div class="bg-gray-100 p-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-medium">Check-in</span>
+                                    <span class="text-gray-600">After 3:00 PM</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-medium">Check-out</span>
+                                    <span class="text-gray-600">Before 11:00 AM</span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <div class="mb-4">
+                                    <label for="checkin" class="block text-gray-700 mb-2">Check-in date</label>
+                                    <input type="date" id="checkin"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="checkout" class="block text-gray-700 mb-2">Check-out date</label>
+                                    <input type="date" id="checkout"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="guests" class="block text-gray-700 mb-2">Guests</label>
+                                    <select id="guests"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        <option>1 guest</option>
+                                        <option>2 guests</option>
+                                        <option>3 guests</option>
+                                        <option>4 guests</option>
+                                        <option>5+ guests</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg transition duration-300 mb-4">
+                            Book Now
+                        </button>
+
+                        <div class="text-center text-gray-600 text-sm">
+                            <p>You won't be charged yet</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4">KrakówLux</h3>
+                        <p class="text-gray-400">
+                            Premium apartments in the heart of Kraków. Experience comfort, style and excellent service.
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="index.html" class="text-gray-400 hover:text-white transition">Home</a></li>
+                            <li><a href="index.html#apartments"
+                                    class="text-gray-400 hover:text-white transition">Apartments</a></li>
+                            <li><a href="index.html#about" class="text-gray-400 hover:text-white transition">About</a>
+                            </li>
+                            <li><a href="index.html#contact"
+                                    class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Contact</h4>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-gray-400">
+                                <i data-feather="map-pin" class="w-4 h-4 mr-2"></i>
+                                Rynek Główny 5, Kraków
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i data-feather="phone" class="w-4 h-4 mr-2"></i>
+                                +48 123 456 789
+                            </li>
+                            <li class="flex items-center text-gray-400">
+                                <i data-feather="mail" class="w-4 h-4 mr-2"></i>
+                                info@krakowlux.com
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition">
+                                <i data-feather="facebook" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition">
+                                <i data-feather="instagram" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition">
+                                <i data-feather="twitter" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                        <div class="mt-6">
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition duration-300">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
+                    <p>&copy; 2023 KrakówLux. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+        <script>
+            // Initialize feather icons
+            feather.replace();
+        </script>
+    </body>
+
+</html>
+
+
+This code creates:
+
+1. A beautiful landing page (index.html) with:
+- Modern navigation with hamburger menu for mobile
+- Full-screen video header showcasing Kraków
+- About section with text and images
+- Apartment cards section with 3 apartments that open a modal when clicked
+- Testimonials section with reviews from Booking.com and Airbnb
+- Contact section with form and map
+- Footer with contact information and links
+
+2. A detailed apartment page (apartment-details.html) that would be linked from the "More Information" button in the
+modal, featuring:
+- Gallery of apartment images
+- Detailed description
+- Amenities list
+- Location map
+- Guest reviews
+- Booking sidebar with date picker
+
+3. A modal that appears when clicking on apartment cards, showing:
+- Apartment details with tabs for Description, Amenities, Location, and Reviews
+- Interactive tab system
+- Beautiful styling matching the overall design
+- "More Information" button that links to the detailed apartment page
+
+The design is fully responsive and uses Tailwind CSS for styling, with some custom CSS for specific components. The
+modal functionality is implemented with JavaScript.
