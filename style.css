@@ -1,0 +1,202 @@
+/* ========== BASE ========== */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  color: #1f2937;
+  background: #fff;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+a:hover {
+  color: #2563eb;
+}
+
+/* ========== SECTIONS ========== */
+.c-section {
+  padding: 4rem 1rem;
+}
+.c-section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.c-section-subtitle {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+/* ========== BUTTONS ========== */
+.c-btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  font-weight: 500;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+.c-btn--filled {
+  background: #2563eb;
+  color: #fff;
+}
+.c-btn--filled:hover {
+  background: #1d4ed8;
+}
+.c-btn--outline {
+  border: 2px solid #2563eb;
+  color: #2563eb;
+}
+.c-btn--outline:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* ========== HERO VIDEO & SLIDER ========== */
+.hero-video {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.hero-video img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+.hero-content {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+  text-align: center;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* Social Icons */
+.social-icon {
+  display:flex;align-items:center;justify-content:center;
+  width:37px;height:37px;
+  border:1px solid white;border-radius:50%;
+  color:white;transition:all 0.3s ease;
+}
+.social-icon:hover { background:white;color:#2563eb; }
+
+/* Mobile Menu Links */
+.c-mobile-link {
+  display:flex;align-items:center;justify-content:center;
+  background-size:cover;background-position:center;
+  position:relative;border-radius:0.75rem;overflow:hidden;
+  height:100%;color:white;font-weight:600;
+  transition:transform 0.3s ease;
+}
+.c-mobile-link::after {
+  content:"";position:absolute;inset:0;background:rgba(0,0,0,0.3);
+  transition:background 0.3s ease;
+}
+.c-mobile-link:hover::after { background:rgba(0,0,0,0.6); }
+.c-mobile-link:hover { transform:scale(1.05); }
+
+/* ========== CARDS ========== */
+.c-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.c-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.c-card:hover img {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+.c-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.4s ease;
+}
+.c-card:hover .c-overlay-dark {
+  background: rgba(0, 0, 0, 0.2);
+}
+.c-card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  color: #fff;
+  z-index: 2;
+}
+
+/* ========== MODAL ========== */
+.c-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+}
+.c-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.c-modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  z-index: 10;
+  transform: translateY(-20px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+}
+.c-modal-content.modal-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomIn {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
+}
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+.c-fade-in { animation: fadeIn 0.6s ease forwards; }
+.c-hover-zoom:hover img { transform: scale(1.1); }
+.hero-slide-zoom {
+  animation: heroZoom 10s ease-in-out forwards;
+}
+
+/* ========== NAVBAR SCROLL EFFECT ========== */
+.nav-scrolled {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
