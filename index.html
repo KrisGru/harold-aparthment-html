@@ -38,11 +38,6 @@
                 transition: background-color 0.3s ease;
             }
 
-            .nav-scrolled {
-                /* background-color: rgba(255, 255, 255, 0.9); */
-                /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
-            }
-
             .nav-open {
                 background-color: #ddd9d6f0;
             }
@@ -81,10 +76,6 @@
                 transform: translate(-50%, -50%) scale(1);
             }
 
-            .icon-modal-active {
-                color: #4a4948 !important;
-                stroke: #4a4948 !important;
-            }
 
             .info-tabs {
                 display: flex;
@@ -140,16 +131,7 @@
                 background-color: #FF5A5F;
             }
 
-            /* button.rounded-3xl {
-                font-size: 13px;
-                font-family: lato, sans-serif;
-                background-color: #9d9990;
-            }
 
-
-            button.rounded-3xl:hover {
-                background-color: #4a4948;
-            } */
 
             .c-btn {
                 font-size: 13px;
@@ -295,22 +277,6 @@
                 background: rgba(74, 73, 72, 0.1);
             }
 
-            /* targetujemy svg po feather.replace oraz fallback na <i> */
-            .arrow-icon svg,
-            .arrow-icon i {
-                display: inline-block;
-                width: 18px;
-                /* dopasuj wielkość ikonki wewnątrz koła */
-                height: 18px;
-                transform-origin: center;
-                transition: transform 0.35s cubic-bezier(.22, .9, .26, 1), opacity 0.2s;
-            }
-
-            /* jeśli chcesz, żeby przy hover animacja była „uciekająca” w dół */
-            .arrow-icon:hover svg,
-            .arrow-icon:hover i {
-                animation: arrowEscape 0.9s forwards;
-            }
 
             /* klatki animacji: przesunięcie w dół (ucieczka), a potem osiadanie lekko niżej */
             @keyframes arrowEscape {
@@ -330,11 +296,6 @@
                 /* finalne ustawienie (lekko w dół) */
             }
 
-            /* opcjonalnie: delikatny efekt hover na obręczy (jak social-icon) */
-            .arrow-icon:hover {
-                border-color: rgba(255, 255, 255, 0.9);
-                background: rgba(255, 255, 255, 0.03);
-            }
 
             .scroll-btn {
                 position: relative;
@@ -431,13 +392,6 @@
                             <i data-feather="mail"></i>
                         </a>
                     </div>
-                    <!-- <button
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-3xl transition duration-300">
-                        Zarezerwuj
-                    </button> -->
-                    <!-- <button class="c-btn c-btn--filled">
-                        Zarezerwuj
-                    </button> -->
                     <a href="/" class="c-btn c-btn--filled">
                         zarezerwuj
                     </a>
