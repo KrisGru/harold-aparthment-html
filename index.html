@@ -140,7 +140,7 @@
                 background-color: #FF5A5F;
             }
 
-            button.rounded-3xl {
+            /* button.rounded-3xl {
                 font-size: 13px;
                 font-family: lato, sans-serif;
                 background-color: #9d9990;
@@ -149,16 +149,65 @@
 
             button.rounded-3xl:hover {
                 background-color: #4a4948;
+            } */
+
+            .c-btn {
+                font-size: 13px;
+                font-family: lato, sans-serif;
+                line-height: 1;
+                /* wyrównanie do 37px */
+                height: 37px;
+                /* taka sama wysokość jak social-icon */
+                padding: 0 1.5rem;
+                /* poziomy padding */
+                border-radius: 9999px;
+                /* rounded-full */
+                transition: all 0.3s ease;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                text-decoration: none;
+                /* ważne dla <a> */
+                cursor: pointer;
+                border: 1px solid transparent;
             }
+
+            /* Wariant z tłem */
+            .c-btn--filled {
+                background-color: #9d9990;
+                color: white;
+            }
+
+            .c-btn--filled:hover {
+                background-color: #4a4948;
+            }
+
+            /* Wariant bez tła (outline) */
+            .c-btn--outline {
+                background-color: transparent;
+                border-color: #9d9990;
+                color: #9d9990;
+            }
+
+            .c-btn--outline:hover {
+                border-color: #4a4948;
+                color: #4a4948;
+            }
+
+
 
             #menuToggle span {
                 will-change: transform, width;
                 transition: all 0.8s cubic-bezier(.23, 1, .32, 1);
             }
 
+            #menuToggle span:nth-child(2) {
+                transform-origin: left center;
+            }
+
             #menuToggle:hover span:nth-child(2) {
-                width: 50%;
-                opacity: 0.7;
+                transform: scaleX(0.6);
+                opacity: 0.9;
             }
 
             .hero-zoom-img {
@@ -208,7 +257,7 @@
             }
 
             #menuToggle.active span:nth-child(1) {
-                transform: translateY(10px) rotate(45deg);
+                transform: translateY(9px) rotate(45deg);
             }
 
             #menuToggle.active span:nth-child(2) {
@@ -217,7 +266,131 @@
             }
 
             #menuToggle.active span:nth-child(3) {
-                transform: translateY(-10px) rotate(-45deg);
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .social-icon {
+                width: 40px;
+                /* jak hamburger */
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 9999px;
+                border: 1px solid white;
+                transition: all 0.3s ease;
+                color: white;
+            }
+
+            .social-icon:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .menu-social-contrast .social-icon {
+                border-color: #4a4948;
+                color: #4a4948;
+            }
+
+            .menu-social-contrast .social-icon:hover {
+                background: rgba(74, 73, 72, 0.1);
+            }
+
+            /* targetujemy svg po feather.replace oraz fallback na <i> */
+            .arrow-icon svg,
+            .arrow-icon i {
+                display: inline-block;
+                width: 18px;
+                /* dopasuj wielkość ikonki wewnątrz koła */
+                height: 18px;
+                transform-origin: center;
+                transition: transform 0.35s cubic-bezier(.22, .9, .26, 1), opacity 0.2s;
+            }
+
+            /* jeśli chcesz, żeby przy hover animacja była „uciekająca” w dół */
+            .arrow-icon:hover svg,
+            .arrow-icon:hover i {
+                animation: arrowEscape 0.9s forwards;
+            }
+
+            /* klatki animacji: przesunięcie w dół (ucieczka), a potem osiadanie lekko niżej */
+            @keyframes arrowEscape {
+                0% {
+                    transform: translateY(0);
+                }
+
+                40% {
+                    transform: translateY(18px);
+                }
+
+                /* „ucieczka” — możesz regulować */
+                100% {
+                    transform: translateY(6px);
+                }
+
+                /* finalne ustawienie (lekko w dół) */
+            }
+
+            /* opcjonalnie: delikatny efekt hover na obręczy (jak social-icon) */
+            .arrow-icon:hover {
+                border-color: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.03);
+            }
+
+            .scroll-btn {
+                position: relative;
+                overflow: visible;
+                /* ważne, bo animowana obręcz wychodzi poza */
+                transition: border-color 0.3s, background 0.3s;
+            }
+
+            .scroll-btn::before {
+                content: "";
+                position: absolute;
+                inset: -1px;
+                /* trochę większe niż przycisk */
+                border-radius: 50%;
+                border: 1px solid rgba(255, 255, 255, 0.6);
+                animation: pulse 2.5s infinite;
+            }
+
+            .scroll-btn svg {
+                width: 20px;
+                height: 20px;
+                animation: arrowBounce 1.8s infinite;
+            }
+
+            .scroll-btn:hover {
+                border-color: rgba(255, 255, 255, 0.9);
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    opacity: 0.7;
+                }
+
+                70% {
+                    transform: scale(1.6);
+                    opacity: 0;
+                }
+
+                100% {
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+
+            @keyframes arrowBounce {
+
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+
+                50% {
+                    transform: translateY(8px);
+                }
             }
         </style>
     </head>
@@ -234,26 +407,46 @@
                     </button> -->
                     <button id="menuToggle"
                         class="group flex flex-col justify-center items-center w-10 h-10 focus:outline-none transition-transform duration-300">
-                        <span class="block w-7 h-0.5 bg-white mb-1 transition-all duration-300"></span>
-                        <span class="block w-7 h-0.5 bg-white mb-1 transition-all duration-300"></span>
-                        <span class="block w-7 h-0.5 bg-white transition-all duration-300"></span>
+                        <span class="block w-7 h-[1px] bg-white mb-2 transition-all duration-300"></span>
+                        <span class="block w-7 h-[1px] bg-white mb-2 transition-all duration-300"></span>
+                        <span class="block w-7 h-[1px] bg-white transition-all duration-300"></span>
                     </button>
                 </div>
 
                 <!-- Social Media & Book Button -->
                 <div class="hidden md:flex items-center space-x-4">
-                    <a href="#" class="text-white"><i data-feather="instagram" stroke-width="1"></i></a>
-                    <a href="#" class="text-white"><i data-feather="facebook" stroke-width="1"></i></a>
-                    <button
+                    <!-- <a href="#" class="text-white"><i data-feather="instagram" stroke-width="1"></i></a>
+                    <a href="#" class="text-white"><i data-feather="facebook" stroke-width="1"></i></a> -->
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="#"
+                            class="flex items-center justify-center w-[37px] h-[37px] border border-white rounded-full text-white transition duration-300 social-icon">
+                            <i data-feather="instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="flex items-center justify-center w-[37px] h-[37px] border border-white rounded-full text-white transition duration-300 social-icon">
+                            <i data-feather="facebook"></i>
+                        </a>
+                        <a href="mailto:kontakt@twojadomena.pl"
+                            class="flex items-center justify-center w-[37px] h-[37px] border border-white rounded-full text-white transition duration-300 social-icon">
+                            <i data-feather="mail"></i>
+                        </a>
+                    </div>
+                    <!-- <button
                         class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-3xl transition duration-300">
                         Zarezerwuj
-                    </button>
+                    </button> -->
+                    <!-- <button class="c-btn c-btn--filled">
+                        Zarezerwuj
+                    </button> -->
+                    <a href="/" class="c-btn c-btn--filled">
+                        zarezerwuj
+                    </a>
                 </div>
             </div>
 
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden nav-open h-[calc(100vh-6rem)] rounded-b-3xl shadow-lg px-4 pb-4">
-                <div class="grid grid-cols-3 sm:grid-cols-2 grid-rows-2 sm:grid-rows-3 gap-4 p-4 h-full">
+                <div class="grid grid-cols-2 sm:grid-cols-3 grid-rows-3 sm:grid-rows-2 gap-4 p-4 h-full">
                     <a href="#apartamenty" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
                         <img src="/images/apartamenty.jpg" alt="Apartamenty"
                             class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
@@ -322,185 +515,167 @@
             <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
                 <div class="text-center px-6">
                     <!-- Logo -->
-                    <div class="mx-auto md:mx-0">
-                        <a href="#" class="text-3xl font-bold text-gray-800">
+                    <div class="absolute top-20 left-1/2 transform -translate-x-1/2 text-center">
+                        <a href="#" class="text-5xl font-extrabold tracking-wide text-white drop-shadow-lg">
                             <span class="text-blue-600">Kraków</span>Lux
                         </a>
                     </div>
-                    <!-- <h1 class="text-4xl md:text-6xl font-bold text-white mb-6" data-aos="fade-up">
-                    Luxury Apartments in the Heart of Kraków
-                </h1>
-                <p class="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">
-                    Experience the perfect blend of comfort and elegance in our premium apartments
-                </p> -->
-                    <button
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-3xl text-lg transition duration-300"
-                        data-aos="fade-up" data-aos-delay="200">
-                        Explore Our Apartments
-                    </button>
-                </div>
-            </div>
-        </section>
 
-        <!-- About Section -->
-        <section id="about" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center">
-                    <div class="md:w-1/2 mb-10 md:mb-0 md:pr-10" data-aos="fade-right">
-                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
-                            Discover Our Unique Apartments
-                        </h2>
-                        <p class="text-gray-600 mb-6">
-                            Located in the most prestigious areas of Kraków, our apartments offer the perfect
-                            combination of modern comfort and historic charm. Each space is carefully designed to
-                            provide an unforgettable experience.
-                        </p>
-                        <p class="text-gray-600 mb-8">
-                            Whether you're visiting for business or pleasure, our apartments provide all the amenities
-                            you need for a perfect stay in this beautiful city.
-                        </p>
-                        <button
-                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-3xl transition duration-300">
-                            Learn More
+                    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2">
+                        <button id="scrollDownBtn"
+                            class="scroll-btn flex items-center justify-center w-[50px] h-[50px] border border-white rounded-full text-white">
+                            <i data-feather="chevron-down"></i>
                         </button>
                     </div>
-                    <div class="md:w-1/2" data-aos="fade-left">
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="rounded-lg overflow-hidden h-64">
-                                <img src="http://static.photos/interior/600x400/1" alt="Apartment interior"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="rounded-lg overflow-hidden h-64">
-                                <img src="http://static.photos/interior/600x400/2" alt="Apartment interior"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="rounded-lg overflow-hidden h-64">
-                                <img src="http://static.photos/interior/600x400/3" alt="Apartment interior"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div class="rounded-lg overflow-hidden h-64">
-                                <img src="http://static.photos/interior/600x400/4" alt="Apartment interior"
-                                    class="w-full h-full object-cover">
-                            </div>
+                </div>
+            </div>
+        </section>
+        <!-- Apartments Section -->
+        <section id="apartments" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <!-- Tytuł -->
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">
+                    Our Premium Apartments
+                </h2>
+
+                <!-- Krótki opis -->
+                <p class="text-gray-600 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
+                    Choose from our selection of beautifully designed apartments in Kraków and Wieliczka's most
+                    desirable
+                    locations.
+                </p>
+
+                <!-- 3 Kafelki -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
+                    <!-- Apartment 1 -->
+                    <a href="/apartments/royal"
+                        class="group block rounded-lg overflow-hidden h-64 shadow-md transition duration-300 relative">
+                        <img src="http://static.photos/interior/600x400/1" alt="Royal Apartment"
+                            class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-500">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition duration-500">
                         </div>
-                    </div>
+                        <div class="absolute bottom-0 left-0 p-4 text-left">
+                            <h3 class="text-xl font-bold text-white">Royal Apartment</h3>
+                            <p class="text-sm text-gray-200">2 beds • 2-4 guests • Old Town</p>
+                        </div>
+                    </a>
+
+                    <!-- Apartment 2 -->
+                    <a href="/apartments/modern"
+                        class="group block rounded-lg overflow-hidden h-64 shadow-md transition duration-300 relative">
+                        <img src="http://static.photos/interior/600x400/2" alt="Modern Loft"
+                            class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-500">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition duration-500">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 text-left">
+                            <h3 class="text-xl font-bold text-white">Modern Loft</h3>
+                            <p class="text-sm text-gray-200">1 bed • 1-2 guests • Kazimierz</p>
+                        </div>
+                    </a>
+
+                    <!-- Apartment 3 -->
+                    <a href="/apartments/garden"
+                        class="group block rounded-lg overflow-hidden h-64 shadow-md transition duration-300 relative">
+                        <img src="http://static.photos/interior/600x400/3" alt="Garden Residence"
+                            class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-500">
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 group-hover:bg-opacity-20 transition duration-500">
+                        </div>
+                        <div class="absolute bottom-0 left-0 p-4 text-left">
+                            <h3 class="text-xl font-bold text-white">Garden Residence</h3>
+                            <p class="text-sm text-gray-200">3 beds • 3-6 guests • Wieliczka</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </section>
 
-        <!-- Apartments Section -->
-        <section id="apartments" class="py-20 bg-gray-50">
+        <!-- Sekcja marketingowa - CTA -->
+        <section id="booking-cta" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center" data-aos="fade-up">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">
+                    Your Perfect Stay Awaits
+                </h2>
+                <p class="text-gray-600 max-w-2xl mx-auto mb-8">
+                    Experience comfort, style, and top locations with our premium apartments in Kraków and Wieliczka.
+                    Book today and turn your trip into something truly unforgettable.
+                </p>
+                <a href="#" class="c-btn c-btn--outline">
+                    Zarezerwuj
+                </a>
+            </div>
+        </section>
+
+        <!-- Sekcja z mapą -->
+        <section id="map-section" class="py-20 bg-white">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16" data-aos="fade-up">
+                <div class="text-center mb-12" data-aos="fade-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        Our Premium Apartments
+                        Find Us on the Map
                     </h2>
                     <p class="text-gray-600 max-w-2xl mx-auto">
-                        Choose from our selection of beautifully designed apartments in Kraków's most desirable
-                        locations
+                        Our apartments are conveniently located to give you the best access to Kraków and Wieliczka
+                        attractions.
+                    </p>
+                </div>
+                <!-- Mapa -->
+                <div class="rounded-xl overflow-hidden shadow-lg h-96" data-aos="fade-up" data-aos-delay="100">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25629.181541527938!2d19.93685695!3d50.0619471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b1d1a64f2a3%3A0x82b1eabc5a6b4c5!2sKrak%C3%B3w!5e0!3m2!1spl!2spl!4v1695380955981!5m2!1spl!2spl"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sekcja z atrakcjami -->
+        <section id="nearby-attractions" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-12" data-aos="fade-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                        Attractions Nearby
+                    </h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Explore the best attractions near our apartments in Kraków and Wieliczka.
                     </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Apartment 1 -->
-                    <div class="apartment-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <div class="relative overflow-hidden h-64">
-                            <img src="http://static.photos/interior/800x600/1" alt="Royal Apartment"
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Kraków -->
+                    <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                        <div class="relative h-64">
+                            <img src="http://static.photos/cityscape/800x600/1" alt="Kraków"
                                 class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-2xl font-bold text-white">Royal Apartment</h3>
-                                <p class="text-white">Old Town</p>
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                <h3 class="text-2xl md:text-3xl font-bold text-white">Kraków</h3>
                             </div>
                         </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-4">
-                                <div>
-                                    <span class="text-gray-600">From</span>
-                                    <span class="text-2xl font-bold text-gray-800 ml-2">€120</span>
-                                    <span class="text-gray-600">/night</span>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">2 beds</span>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1 bath</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-6">Elegant apartment with stunning views of the Main Market
-                                Square.</p>
-                            <button
-                                class="w-full apartment-modal-btn bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-3xl transition duration-300"
-                                data-apartment="royal">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Apartment 2 -->
-                    <div class="apartment-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <div class="relative overflow-hidden h-64">
-                            <img src="http://static.photos/interior/800x600/2" alt="Modern Loft"
-                                class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-2xl font-bold text-white">Modern Loft</h3>
-                                <p class="text-white">Kazimierz</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-4">
-                                <div>
-                                    <span class="text-gray-600">From</span>
-                                    <span class="text-2xl font-bold text-gray-800 ml-2">€95</span>
-                                    <span class="text-gray-600">/night</span>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1 bed</span>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">1 bath</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-6">Stylish loft in the vibrant Kazimierz district with modern
-                                amenities.</p>
-                            <button
-                                class="w-full apartment-modal-btn bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-3xl transition duration-300"
-                                data-apartment="modern">
-                                View Details
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Apartment 3 -->
-                    <div class="apartment-card bg-white rounded-xl overflow-hidden shadow-md" data-aos="fade-up"
-                        data-aos-delay="300">
-                        <div class="relative overflow-hidden h-64">
-                            <img src="http://static.photos/interior/800x600/3" alt="Garden Residence"
-                                class="w-full h-full object-cover">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70"></div>
-                            <div class="absolute bottom-0 left-0 p-6">
-                                <h3 class="text-2xl font-bold text-white">Garden Residence</h3>
-                                <p class="text-white">Podgórze</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <div class="flex justify-between items-center mb-4">
-                                <div>
-                                    <span class="text-gray-600">From</span>
-                                    <span class="text-2xl font-bold text-gray-800 ml-2">€150</span>
-                                    <span class="text-gray-600">/night</span>
-                                </div>
-                                <div class="flex space-x-2">
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">3 beds</span>
-                                    <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">2 baths</span>
-                                </div>
-                            </div>
-                            <p class="text-gray-600 mb-6">Spacious apartment with private garden, perfect for families.
+                        <div class="p-6 text-center">
+                            <p class="text-gray-600">
+                                Discover the cultural heart of Poland with stunning architecture, historic sites, and
+                                vibrant
+                                nightlife.
                             </p>
-                            <button
-                                class="w-full apartment-modal-btn bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-3xl transition duration-300"
-                                data-apartment="garden">
-                                View Details
-                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Wieliczka -->
+                    <div class="rounded-xl overflow-hidden shadow-md hover:shadow-xl transition duration-300">
+                        <div class="relative h-64">
+                            <img src="http://static.photos/cityscape/800x600/2" alt="Wieliczka"
+                                class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                <h3 class="text-2xl md:text-3xl font-bold text-white">Wieliczka</h3>
+                            </div>
+                        </div>
+                        <div class="p-6 text-center">
+                            <p class="text-gray-600">
+                                Home to the famous Salt Mine, a UNESCO World Heritage site offering unique underground
+                                tours and
+                                history.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -749,10 +924,9 @@
                             </a>
                         </div>
                         <div class="mt-6">
-                            <button
-                                class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-3xl transition duration-300">
-                                Book Now
-                            </button>
+                            <a href="/" class="c-btn c-btn--filled">
+                                zarezerwuj
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -810,10 +984,9 @@
                                             <span class="text-2xl font-bold text-gray-800 ml-2">€120</span>
                                             <span class="text-gray-600">/night</span>
                                         </div>
-                                        <button
-                                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-3xl transition duration-300">
-                                            Book Now
-                                        </button>
+                                        <a href="/" class="c-btn c-btn--outline">
+                                            zarezerwuj
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -953,7 +1126,7 @@
             });
 
             // Initialize feather icons
-            feather.replace();
+            feather.replace({ width: 16, height: 16 }); // <-- tu ustawiasz skalę ikon
 
             // Mobile menu toggle
             const menuToggle = document.getElementById('menuToggle');
@@ -1135,6 +1308,44 @@
 
             // Zmień zdjęcie co 10 sekund (tyle trwa animacja CSS)
             setInterval(nextHeroImage, 10000);
+
+            // wolniejszy smooth scroll — custom function (duration w ms)
+            function smoothScrollToElement(targetElement, duration = 900) {
+                const targetY = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const startY = window.pageYOffset;
+                const diff = targetY - startY;
+                let startTime = null;
+
+                function easeInOutQuad(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    const time = Math.min(1, (timestamp - startTime) / duration);
+                    const eased = easeInOutQuad(time);
+                    window.scrollTo(0, Math.round(startY + diff * eased));
+                    if (time < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                }
+                window.requestAnimationFrame(step);
+            }
+
+            // event listener dla przycisku
+            const scrollBtn = document.getElementById('scrollDownBtn');
+            if (scrollBtn) {
+                scrollBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // znajdź następną sekcję po hero
+                    const hero = document.querySelector('section.hero-video') || document.querySelector('.hero-video');
+                    let nextSection = null;
+                    if (hero) nextSection = hero.nextElementSibling;
+                    // fallback: wybierz pierwszą sekcję po elemencie body
+                    if (!nextSection) nextSection = document.querySelector('section:not(.hero-video)');
+                    if (nextSection) {
+                        smoothScrollToElement(nextSection, 1200); // <- 900ms, zmień jeśli chcesz wolniej/szybciej
+                    }
+                });
+            }
         </script>
     </body>
 
