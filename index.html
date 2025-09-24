@@ -253,18 +253,62 @@
 
             <!-- Mobile Menu -->
             <div id="mobileMenu" class="hidden nav-open h-[calc(100vh-6rem)] rounded-b-3xl shadow-lg px-4 pb-4">
-                <a href="#" class="block py-2 text-gray-800 hover:text-blue-600">Strona Główna</a>
-                <a href="#apartments" class="block py-2 text-gray-800 hover:text-blue-600">Apartamenty</a>
-                <a href="#about" class="block py-2 text-gray-800 hover:text-blue-600">O nas</a>
-                <a href="#contact" class="block py-2 text-gray-800 hover:text-blue-600">Kontakt</a>
-                <div class="flex justify-center space-x-4 mt-4">
-                    <a href="#" class="text-gray-800 hover:text-blue-600"><i data-feather="instagram"></i></a>
-                    <a href="#" class="text-gray-800 hover:text-blue-600"><i data-feather="facebook"></i></a>
+                <div class="grid grid-cols-3 sm:grid-cols-2 grid-rows-2 sm:grid-rows-3 gap-4 p-4 h-full">
+                    <a href="#apartamenty" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/apartamenty.jpg" alt="Apartamenty"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">Apartamenty</span>
+                        </div>
+                    </a>
+                    <a href="#restauracja" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/restauracja.jpg" alt="Restauracja"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">Restauracja</span>
+                        </div>
+                    </a>
+
+                    <a href="#spa" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/spa.jpg" alt="SPA"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">SPA</span>
+                        </div>
+                    </a>
+
+                    <a href="#basen" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/basen.jpg" alt="Basen"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">Basen</span>
+                        </div>
+                    </a>
+
+                    <a href="#atrakcje" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/okoliczne-atrakcje.jpg" alt="Atrakcje"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">Atrakcje</span>
+                        </div>
+                    </a>
+
+                    <a href="#kontakt" class="relative h-full overflow-hidden rounded-2xl shadow-lg group">
+                        <img src="/images/kontakt.jpg" alt="Kontakt"
+                            class="w-full h-32 object-cover transform transition-transform duration-300 group-hover:scale-110">
+                        <div
+                            class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-white text-lg font-semibold">Kontakt</span>
+                        </div>
+                    </a>
                 </div>
-                <button
-                    class="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-3xl transition duration-300">
-                    Book Now
-                </button>
+
+
             </div>
         </nav>
 
