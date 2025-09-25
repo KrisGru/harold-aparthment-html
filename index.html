@@ -354,24 +354,17 @@
                 }
             }
 
-            #attractionsModal .left-panel button {
-                width: 140px;
-                height: 140px;
-                border-radius: 50%;
-                background: white;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                border: none;
-                font-weight: bold;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-align: center;
-                padding: 1rem;
+            /* Podstawowy styl modala (ukryty) */
+            #attractionsModal {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
             }
 
-            #attractionsModal .left-panel button:hover {
-                background: #4a4948;
-                color: white;
+            /* Stan aktywny modala */
+            #attractionsModal.show {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
 
             #attractionsModal .desc::-webkit-scrollbar {
@@ -381,6 +374,114 @@
             #attractionsModal .desc::-webkit-scrollbar-thumb {
                 background: #aaa;
                 border-radius: 4px;
+            }
+
+            #closeAttractionsModal.active span:nth-child(1) {
+                transform: translateY(6px) rotate(45deg);
+            }
+
+            #closeAttractionsModal.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            #closeAttractionsModal.active span:nth-child(3) {
+                transform: translateY(-6px) rotate(-45deg);
+            }
+
+            #closeAttractionsModal {
+                background: white;
+                border-radius: 9999px;
+                /* pełne kółko */
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+                transition: background 0.3s, box-shadow 0.3s;
+            }
+
+            #attractionsModal .left-panel button {
+                width: 100%;
+                padding: 0.6rem 1rem;
+                background: transparent;
+                border: 2px solid transparent;
+                border-left: 3px solid rgba(74, 73, 72, 0.2);
+                /* delikatniejszy, mniej kontrastujący */
+                color: #4a4948;
+                font-weight: 300;
+                font-size: 0.9rem;
+                text-align: left;
+                cursor: pointer;
+                position: relative;
+                overflow: hidden;
+                transition: color 0.3s ease, border-left-color 0.3s ease;
+                margin: 0.4rem 0;
+            }
+
+            #attractionsModal .left-panel button::after {
+                content: '';
+                position: absolute;
+                left: -100%;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(74, 73, 72, 0.05);
+                z-index: 0;
+                transform: skewX(-20deg);
+                transition: all 0.4s ease;
+            }
+
+            #attractionsModal .left-panel button:hover::after {
+                left: 0;
+            }
+
+            #attractionsModal .left-panel button:hover {
+                border-left-color: rgba(74, 73, 72, 0.5);
+                color: #2c2b2a;
+            }
+
+            #attractionsModal .left-panel button.active {
+                border-left-color: #4a4948;
+                font-weight: 500;
+                color: #2c2b2a;
+            }
+
+            /* Wewnętrzne elementy, które będą animowane przy zmianie atrakcji */
+            /* Wewnętrzne elementy prawego panelu */
+            .right-panel .animate-content {
+                opacity: 0;
+                transform: scale(0.95);
+                transition: opacity 0.4s ease, transform 0.4s ease;
+            }
+
+            .right-panel .animate-content.show {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            @keyframes luxuryIn {
+                0% {
+                    opacity: 0;
+                    transform: translateY(20px) scale(0.95);
+                    filter: blur(4px);
+                }
+
+                60% {
+                    opacity: 1;
+                    transform: translateY(-5px) scale(1.02);
+                    filter: blur(0);
+                }
+
+                100% {
+                    opacity: 1;
+                    transform: translateY(0) scale(1);
+                    filter: blur(0);
+                }
+            }
+
+            .right-panel .animate-content {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+
+            .right-panel .animate-content.show {
+                animation: luxuryIn 0.6s ease forwards;
             }
         </style>
     </head>
@@ -912,12 +1013,16 @@
             </div>
         </footer>
 
-        <!-- MODAL – pełnoekranowy -->
-        <div id="attractionsModal" class="fixed inset-0 hidden z-[2000] p-6 bg-[#ddd9d6f0]">
+        <!-- MODAL –atrakcje -->
+        <div id="attractionsModal" class="fixed inset-0 hidden z-[2000] bg-[#ddd9d6f0] rounded-3xl m-2.5 shadow-lg">
+            <!-- Przycisk zamykania po lewej stronie w formie X -->
             <button id="closeAttractionsModal"
-                class="absolute top-4 right-6 text-3xl text-gray-700 hover:text-black">&times;</button>
+                class="absolute top-4 left-4 flex justify-center items-center w-10 h-10 focus:outline-none z-50">
+                <span class="block w-7 h-[1px] bg-gray-800 rotate-45 absolute"></span>
+                <span class="block w-7 h-[1px] bg-gray-800 -rotate-45 absolute"></span>
+            </button>
 
-            <div class="flex h-full">
+            <div class="flex h-full p-16">
                 <!-- Lewa strona – kółka z atrakcjami -->
                 <div class="left-panel w-2/5 flex flex-col justify-center items-center gap-4 overflow-y-auto pr-4">
                     <!-- Kółka będą dodawane z JS -->
@@ -932,9 +1037,6 @@
                 </div>
             </div>
         </div>
-
-
-
 
         <script>
             // Initialize AOS animations
@@ -1089,7 +1191,7 @@
                     { name: "Kościół", title: "Kościół Mariacki", subtitle: "Gotycka perła", img: "http://static.photos/city/kosciol.jpg", desc: "Kościół Mariacki z ołtarzem Wita Stwosza..." }
                 ],
                 wieliczka: [
-                    { name: "Kopalnia", title: "Kopalnia Soli", subtitle: "Światowy zabytek", img: "http://static.photos/city/kopalnia.jpg", desc: "Kopalnia Soli w Wieliczce to miejsce z listy UNESCO..." },
+                    { name: "Kopalnia", title: "Kopalnia Soli", subtitle: "Światowy zabytek", img: "http://static.photos/city/kopalnia.jpg", desc: "Urządzane są tutaj także rajdy samochodowe, a lokalni mieszkańcy traktują plażę jak drogę, jeżdżąc po niej quadami i samochodami osobowymi. Ze względu na twarde podłoże i jej niesamowitą długość jest to tutaj bardzo popularne. Jazda po plaży jest dozwolona, ale zaleca się zachowanie ostrożności w pobliżu miejsc gniazdowania ptaków i spacerowiczów. Turyści bardzo często parkują swoje pojazdy bezpośrednio na piasku, tuż obok ręczników i parasoli plażowych, stanowi to część lokalnej tradycji.Urządzane są tutaj także rajdy samochodowe, a lokalni mieszkańcy traktują plażę jak drogę, jeżdżąc po niej quadami i samochodami osobowymi. Ze względu na twarde podłoże i jej niesamowitą długość jest to tutaj bardzo popularne. Jazda po plaży jest dozwolona, ale zaleca się zachowanie ostrożności w pobliżu miejsc gniazdowania ptaków i spacerowiczów. Turyści bardzo często parkują swoje pojazdy bezpośrednio na piasku, tuż obok ręczników i parasoli plażowych, stanowi to część lokalnej tradycji.Urządzane są tutaj także rajdy samochodowe, a lokalni mieszkańcy traktują plażę jak drogę, jeżdżąc po niej quadami i samochodami osobowymi. Ze względu na twarde podłoże i jej niesamowitą długość jest to tutaj bardzo popularne. Jazda po plaży jest dozwolona, ale zaleca się zachowanie ostrożności w pobliżu miejsc gniazdowania ptaków i spacerowiczów. Turyści bardzo często parkują swoje pojazdy bezpośrednio na piasku, tuż obok ręczników i parasoli plażowych, stanowi to część lokalnej tradycji.Urządzane są tutaj także rajdy samochodowe, a lokalni mieszkańcy traktują plażę jak drogę, jeżdżąc po niej quadami i samochodami osobowymi. Ze względu na twarde podłoże i jej niesamowitą długość jest to tutaj bardzo popularne. Jazda po plaży jest dozwolona, ale zaleca się zachowanie ostrożności w pobliżu miejsc gniazdowania ptaków i spacerowiczów. Turyści bardzo często parkują swoje pojazdy bezpośrednio na piasku, tuż obok ręczników i parasoli plażowych, stanowi to część lokalnej tradycji." },
                     { name: "Podziemia", title: "Podziemne komory", subtitle: "Magiczne wnętrza", img: "http://static.photos/city/podziemia.jpg", desc: "Podziemne komory zachwycają rzeźbami solnymi..." },
                     { name: "Kaplica", title: "Kaplica św. Kingi", subtitle: "Podziemna świątynia", img: "http://static.photos/city/kaplica.jpg", desc: "Kaplica św. Kingi wyrzeźbiona w soli to unikat..." },
                     { name: "Muzeum", title: "Muzeum Żup", subtitle: "Historia wydobycia", img: "http://static.photos/city/muzeum_wieliczka.jpg", desc: "Muzeum Żup Solnych pokazuje historię kopalni..." },
@@ -1102,25 +1204,45 @@
 
             // Funkcja pokazująca szczegóły atrakcji
             function showAttraction(item) {
-                titleEl.textContent = item.title;
-                subtitleEl.textContent = item.subtitle;
-                imageEl.src = item.img;
-                descEl.textContent = item.desc;
+                const elements = [titleEl, subtitleEl, imageEl, descEl];
+
+                // Reset animacji
+                elements.forEach(el => {
+                    el.classList.remove('show');
+                    el.classList.add('animate-content');
+                });
+
+                setTimeout(() => {
+                    titleEl.textContent = item.title;
+                    subtitleEl.textContent = item.subtitle;
+                    imageEl.src = item.img;
+                    descEl.textContent = item.desc;
+
+                    elements.forEach(el => {
+                        void el.offsetWidth; // trigger reflow
+                        el.classList.add('show');
+                    });
+                }, 50);
             }
 
             // Otwieranie modala i ładowanie atrakcji
             function openAttractionsModal(city) {
-                leftPanel.innerHTML = "";
+                leftPanel.innerHTML = ""; // czyścimy przyciski
                 attractionsData[city].forEach((item, i) => {
                     const btn = document.createElement('button');
-                    btn.className = "w-28 h-28 rounded-full bg-white shadow-lg flex items-center justify-center text-center p-2 text-sm font-semibold text-gray-800 hover:bg-gray-200 transition";
+                    btn.className = "w-full px-4 py-2 border-l-2 border-l-gray-300 text-gray-700 text-left font-light text-sm relative overflow-hidden mb-2 transition-colors duration-300 hover:border-l-gray-500 hover:text-gray-900";
                     btn.textContent = item.name;
-                    btn.addEventListener('click', () => showAttraction(item));
+                    btn.addEventListener('click', () => showAttraction(item, btn));
                     leftPanel.appendChild(btn);
-                    if (i === 0) showAttraction(item);
+                    if (i === 0) showAttraction(item, btn);
                 });
+
                 attractionsModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
+
+                // wymuś animację
+                setTimeout(() => {
+                    attractionsModal.classList.add('show');
+                }, 10);
             }
 
             // Kliknięcia w kafelki Kraków/Wieliczka
@@ -1133,8 +1255,11 @@
 
             // Zamykanie modala
             closeModalBtn.addEventListener('click', () => {
-                attractionsModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
+                attractionsModal.classList.remove('show');
+                // po zakończeniu animacji ukryj modal
+                setTimeout(() => {
+                    attractionsModal.classList.add('hidden');
+                }, 4000); // dopasowane do czasu transition w CSS
             });
 
             // Zamknięcie modala klawiszem Escape
@@ -1145,6 +1270,10 @@
                 }
             });
 
+            closeModalBtn.addEventListener('click', () => {
+                attractionsModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            });
         </script>
     </body>
 
