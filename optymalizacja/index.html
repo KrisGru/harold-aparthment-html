@@ -353,35 +353,6 @@
                     transform: translateY(8px);
                 }
             }
-
-            #attractionsModal .left-panel button {
-                width: 140px;
-                height: 140px;
-                border-radius: 50%;
-                background: white;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-                border: none;
-                font-weight: bold;
-                font-size: 1rem;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                text-align: center;
-                padding: 1rem;
-            }
-
-            #attractionsModal .left-panel button:hover {
-                background: #4a4948;
-                color: white;
-            }
-
-            #attractionsModal .desc::-webkit-scrollbar {
-                width: 6px;
-            }
-
-            #attractionsModal .desc::-webkit-scrollbar-thumb {
-                background: #aaa;
-                border-radius: 4px;
-            }
         </style>
     </head>
 
@@ -613,9 +584,8 @@
                 </div>
             </div>
         </section>
-
-
         <!-- Sekcja z atrakcjami -->
+
         <section id="nearby-attractions" class="py-20 bg-gray-50">
             <div class="container mx-auto px-6 text-center">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6" data-aos="fade-up">
@@ -627,8 +597,7 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6" data-aos="fade-up" data-aos-delay="200">
                     <!-- Kraków -->
-                    <div class="group relative h-64 rounded-lg overflow-hidden shadow-md transition duration-300 location-card"
-                        data-location="krakow">
+                    <div class="group relative h-64 rounded-lg overflow-hidden shadow-md transition duration-300">
                         <img src="http://static.photos/city/krakow.jpg" alt="Kraków"
                             class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-500">
                         <div
@@ -641,8 +610,7 @@
                     </div>
 
                     <!-- Wieliczka -->
-                    <div class="group relative h-64 rounded-lg overflow-hidden shadow-md transition duration-300 location-card"
-                        data-location="wieliczka">
+                    <div class="group relative h-64 rounded-lg overflow-hidden shadow-md transition duration-300">
                         <img src="http://static.photos/city/wieliczka.jpg" alt="Wieliczka"
                             class="w-full h-full object-cover transform group-hover:scale-110 group-hover:brightness-110 transition duration-500">
                         <div
@@ -912,29 +880,186 @@
             </div>
         </footer>
 
-        <!-- MODAL – pełnoekranowy -->
-        <div id="attractionsModal" class="fixed inset-0 hidden z-[2000] p-6 bg-[#ddd9d6f0]">
-            <button id="closeAttractionsModal"
-                class="absolute top-4 right-6 text-3xl text-gray-700 hover:text-black">&times;</button>
+        <!-- Modal Overlay -->
+        <div id="modalOverlay" class="modal-overlay"></div>
 
-            <div class="flex h-full">
-                <!-- Lewa strona – kółka z atrakcjami -->
-                <div class="left-panel w-2/5 flex flex-col justify-center items-center gap-4 overflow-y-auto pr-4">
-                    <!-- Kółka będą dodawane z JS -->
-                </div>
+        <!-- Modal Content -->
+        <div id="modalContent" class="modal-content">
+            <div class="relative">
+                <button id="closeModal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
+                    <i data-feather="x" class="w-8 h-8"></i>
+                </button>
 
-                <!-- Prawa strona – treść atrakcji -->
-                <div class="right-panel w-3/5 flex flex-col gap-4 overflow-hidden">
-                    <h2 id="attractionTitle" class="text-3xl font-bold text-gray-800"></h2>
-                    <p id="attractionSubtitle" class="text-gray-700"></p>
-                    <img id="attractionImage" src="" alt="" class="w-full h-64 object-cover rounded-lg shadow">
-                    <div id="attractionDesc" class="desc text-gray-800 max-h-64 overflow-y-auto pr-2"></div>
+                <div class="p-8">
+                    <div id="modalHeader">
+                        <h2 class="text-3xl font-bold text-gray-800 mb-2" id="modalTitle">Royal Apartment</h2>
+                        <p class="text-gray-600 mb-6" id="modalLocation">Old Town</p>
+                    </div>
+
+                    <div class="info-tabs mb-8">
+                        <div class="info-tab active" data-tab="description">Description</div>
+                        <div class="info-tab" data-tab="amenities">Amenities</div>
+                        <div class="info-tab" data-tab="location">Location</div>
+                        <div class="info-tab" data-tab="reviews">Reviews</div>
+                    </div>
+
+                    <div class="tab-content">
+                        <div id="description" class="tab-pane active">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+                                <div>
+                                    <img src="http://static.photos/interior/800x600/1" alt="Royal Apartment"
+                                        class="w-full h-auto rounded-lg">
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold text-gray-800 mb-4">About this apartment</h3>
+                                    <p class="text-gray-600 mb-4">
+                                        The Royal Apartment is a beautifully designed space located in the heart of
+                                        Kraków's Old Town, just steps away from the Main Market Square. This elegant
+                                        apartment combines historic charm with modern comforts.
+                                    </p>
+                                    <p class="text-gray-600 mb-6">
+                                        With two comfortable bedrooms and a spacious living area, it's perfect for
+                                        couples, families or small groups looking to experience the best of Kraków in
+                                        style.
+                                    </p>
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <span class="text-gray-600">From</span>
+                                            <span class="text-2xl font-bold text-gray-800 ml-2">€120</span>
+                                            <span class="text-gray-600">/night</span>
+                                        </div>
+                                        <a href="/" class="c-btn c-btn--outline">
+                                            zarezerwuj
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="amenities" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-6">Amenities</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="flex items-center">
+                                    <i data-feather="wifi" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Free WiFi</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="tv" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Smart TV</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="coffee" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Coffee maker</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="wind" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Air conditioning</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="shower" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Hair dryer</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="lock" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Safe</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="utensils" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Fully equipped kitchen</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i data-feather="home" class="text-blue-600 w-5 h-5 mr-3"></i>
+                                    <span class="text-gray-700">Washer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="location" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-6">Location</h3>
+                            <div class="mb-6">
+                                <p class="text-gray-600 mb-4">
+                                    The apartment is located in the very center of Kraków's Old Town, just a 2-minute
+                                    walk from the Main Market Square. You'll be surrounded by historic landmarks,
+                                    excellent restaurants, and vibrant nightlife.
+                                </p>
+                                <p class="text-gray-600">
+                                    Nearby attractions include Wawel Castle (10 min walk), the Jewish Quarter (15 min
+                                    walk), and the Vistula River boulevards (5 min walk).
+                                </p>
+                            </div>
+                            <div class="rounded-xl overflow-hidden shadow-lg">
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2561.069140782804!2d19.93536931571536!3d50.06198337942418!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47165b1aa3e418c3%3A0x61caab5b1033da73!2sRynek%20G%C5%82%C3%B3wny%205%2C%2031-042%20Krak%C3%B3w!5e0!3m2!1sen!2spl!4v1620000000000!5m2!1sen!2spl"
+                                    width="100%" height="300" style="border:0;" allowfullscreen=""
+                                    loading="lazy"></iframe>
+                            </div>
+                        </div>
+
+                        <div id="reviews" class="tab-pane hidden">
+                            <h3 class="text-xl font-bold text-gray-800 mb-6">Guest Reviews</h3>
+                            <div class="space-y-6">
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex">
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">2 weeks ago</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        "Absolutely stunning apartment in the perfect location. The decor was beautiful
+                                        and everything was spotlessly clean. The host provided excellent recommendations
+                                        for local restaurants."
+                                    </p>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-gray-300 mr-3 overflow-hidden">
+                                            <img src="http://static.photos/people/200x200/4" alt="Emma L."
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">Emma L.</span>
+                                    </div>
+                                </div>
+
+                                <div class="bg-gray-50 p-6 rounded-lg">
+                                    <div class="flex items-center mb-4">
+                                        <div class="flex">
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                            <i data-feather="star" class="text-yellow-400 w-4 h-4"></i>
+                                        </div>
+                                        <span class="text-gray-500 text-sm ml-2">1 month ago</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-4">
+                                        "We loved our stay at the Royal Apartment! The location couldn't be better -
+                                        right in the center but still quiet at night. The apartment had everything we
+                                        needed and more. Would definitely stay here again."
+                                    </p>
+                                    <div class="flex items-center">
+                                        <div class="w-8 h-8 rounded-full bg-gray-300 mr-3 overflow-hidden">
+                                            <img src="http://static.photos/people/200x200/5" alt="James R."
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <span class="font-medium text-gray-800">James R.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10 text-center">
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-3xl text-lg transition duration-300">
+                            More Information
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-
-
-
 
         <script>
             // Initialize AOS animations
@@ -972,6 +1097,13 @@
                 }
             });
 
+            // Modal functionality
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalContent = document.getElementById('modalContent');
+            const closeModal = document.getElementById('closeModal');
+            const apartmentButtons = document.querySelectorAll('.apartment-modal-btn');
+            const tabButtons = document.querySelectorAll('.info-tab');
+            const tabPanes = document.querySelectorAll('.tab-pane');
 
             // Funkcja pobierająca wszystkie SVG feather Instagram i Facebook
             function getSocialSvgs() {
@@ -980,6 +1112,97 @@
                     ...document.querySelectorAll('svg.feather-facebook')
                 ];
             }
+
+            // Open modal when apartment button is clicked
+            apartmentButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const apartment = button.getAttribute('data-apartment');
+                    let title, location, description;
+
+                    // Set modal content based on which apartment was clicked
+                    switch (apartment) {
+                        case 'royal':
+                            title = 'Royal Apartment';
+                            location = 'Old Town';
+                            description = 'Elegant apartment with stunning views of the Main Market Square.';
+                            break;
+                        case 'modern':
+                            title = 'Modern Loft';
+                            location = 'Kazimierz';
+                            description = 'Stylish loft in the vibrant Kazimierz district with modern amenities.';
+                            break;
+                        case 'garden':
+                            title = 'Garden Residence';
+                            location = 'Podgórze';
+                            description = 'Spacious apartment with private garden, perfect for families.';
+                            break;
+                    }
+
+                    document.getElementById('modalTitle').textContent = title;
+                    document.getElementById('modalLocation').textContent = location;
+
+                    // Show modal
+                    modalOverlay.style.display = 'block';
+                    modalContent.style.display = 'block';
+
+                    setTimeout(() => {
+                        modalOverlay.style.opacity = '1';
+                        modalContent.classList.add('modal-active');
+                    }, 10);
+
+                    // Prevent scrolling when modal is open
+                    document.body.style.overflow = 'hidden';
+
+                    // Zmień kolor ikon Instagram i Facebook na #4a4948
+                    getSocialSvgs().forEach(svg => {
+                        svg.setAttribute('stroke', '#4a4948');
+                        svg.setAttribute('color', '#4a4948');
+                    });
+                });
+            });
+
+            // Close modal when X button or overlay is clicked
+            closeModal.addEventListener('click', closeModalFunction);
+            modalOverlay.addEventListener('click', closeModalFunction);
+
+            function closeModalFunction() {
+                modalOverlay.style.opacity = '0';
+                modalContent.classList.remove('modal-active');
+
+                setTimeout(() => {
+                    modalOverlay.style.display = 'none';
+                    modalContent.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 300);
+
+                // Przywróć domyślny kolor ikon Instagram i Facebook
+                getSocialSvgs().forEach(svg => {
+                    svg.setAttribute('stroke', '');
+                    svg.setAttribute('color', '');
+                });
+            }
+
+            // Tab functionality
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+
+                    // Remove active class from all buttons and panes
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabPanes.forEach(pane => pane.classList.add('hidden'));
+
+                    // Add active class to clicked button and corresponding pane
+                    button.classList.add('active');
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+
+            // Close modal when pressing Escape key
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modalOverlay.style.display === 'block') {
+                    closeModalFunction();
+                }
+            });
 
             // Hero image slider with zoom animation
             const heroImages = [
@@ -1067,84 +1290,6 @@
                     }
                 });
             }
-
-            const attractionsModal = document.getElementById('attractionsModal');
-            const closeModalBtn = document.getElementById('closeAttractionsModal');
-            const leftPanel = attractionsModal.querySelector('.left-panel');
-            const titleEl = document.getElementById('attractionTitle');
-            const subtitleEl = document.getElementById('attractionSubtitle');
-            const imageEl = document.getElementById('attractionImage');
-            const descEl = document.getElementById('attractionDesc');
-
-            // Dane atrakcji dla Krakowa i Wieliczki
-            const attractionsData = {
-                krakow: [
-                    { name: "Rynek", title: "Rynek Główny", subtitle: "Serce Krakowa", img: "http://static.photos/city/rynek.jpg", desc: "Rynek Główny to jedno z największych średniowiecznych rynków w Europie..." },
-                    { name: "Wawel", title: "Zamek Królewski", subtitle: "Historia Polski", img: "http://static.photos/city/wawel.jpg", desc: "Zamek Królewski na Wawelu to jeden z najważniejszych zabytków..." },
-                    { name: "Kazimierz", title: "Kazimierz", subtitle: "Dzielnica żydowska", img: "http://static.photos/city/kazimierz.jpg", desc: "Kazimierz to klimatyczna dzielnica z synagogami i kawiarniami..." },
-                    { name: "Sukiennice", title: "Sukiennice", subtitle: "Krakowski rynek", img: "http://static.photos/city/sukiennice.jpg", desc: "Sukiennice to symbol handlowej historii Krakowa..." },
-                    { name: "Planty", title: "Planty", subtitle: "Zielone serce miasta", img: "http://static.photos/city/planty.jpg", desc: "Planty to park otaczający Stare Miasto..." },
-                    { name: "Wisła", title: "Wisła", subtitle: "Rzeka Krakowa", img: "http://static.photos/city/wisla.jpg", desc: "Bulwary Wiślane to idealne miejsce na spacer..." },
-                    { name: "Muzeum", title: "Muzeum Narodowe", subtitle: "Sztuka i historia", img: "http://static.photos/city/muzeum.jpg", desc: "Muzeum Narodowe w Krakowie prezentuje kolekcje sztuki..." },
-                    { name: "Kościół", title: "Kościół Mariacki", subtitle: "Gotycka perła", img: "http://static.photos/city/kosciol.jpg", desc: "Kościół Mariacki z ołtarzem Wita Stwosza..." }
-                ],
-                wieliczka: [
-                    { name: "Kopalnia", title: "Kopalnia Soli", subtitle: "Światowy zabytek", img: "http://static.photos/city/kopalnia.jpg", desc: "Kopalnia Soli w Wieliczce to miejsce z listy UNESCO..." },
-                    { name: "Podziemia", title: "Podziemne komory", subtitle: "Magiczne wnętrza", img: "http://static.photos/city/podziemia.jpg", desc: "Podziemne komory zachwycają rzeźbami solnymi..." },
-                    { name: "Kaplica", title: "Kaplica św. Kingi", subtitle: "Podziemna świątynia", img: "http://static.photos/city/kaplica.jpg", desc: "Kaplica św. Kingi wyrzeźbiona w soli to unikat..." },
-                    { name: "Muzeum", title: "Muzeum Żup", subtitle: "Historia wydobycia", img: "http://static.photos/city/muzeum_wieliczka.jpg", desc: "Muzeum Żup Solnych pokazuje historię kopalni..." },
-                    { name: "Tężnia", title: "Tężnia solankowa", subtitle: "Zdrowy klimat", img: "http://static.photos/city/teznia.jpg", desc: "Tężnia to idealne miejsce na spacer i inhalacje..." },
-                    { name: "Park", title: "Park św. Kingi", subtitle: "Zieleń Wieliczki", img: "http://static.photos/city/park.jpg", desc: "Park św. Kingi to zielona oaza w centrum miasta..." },
-                    { name: "Rynek", title: "Rynek Wielicki", subtitle: "Centrum miasta", img: "http://static.photos/city/rynek_wieliczka.jpg", desc: "Rynek to serce Wieliczki z kawiarniami..." },
-                    { name: "Zamek", title: "Zamek Żupny", subtitle: "Historia książąt", img: "http://static.photos/city/zamek.jpg", desc: "Zamek Żupny był siedzibą zarządu kopalni..." }
-                ]
-            };
-
-            // Funkcja pokazująca szczegóły atrakcji
-            function showAttraction(item) {
-                titleEl.textContent = item.title;
-                subtitleEl.textContent = item.subtitle;
-                imageEl.src = item.img;
-                descEl.textContent = item.desc;
-            }
-
-            // Otwieranie modala i ładowanie atrakcji
-            function openAttractionsModal(city) {
-                leftPanel.innerHTML = "";
-                attractionsData[city].forEach((item, i) => {
-                    const btn = document.createElement('button');
-                    btn.className = "w-28 h-28 rounded-full bg-white shadow-lg flex items-center justify-center text-center p-2 text-sm font-semibold text-gray-800 hover:bg-gray-200 transition";
-                    btn.textContent = item.name;
-                    btn.addEventListener('click', () => showAttraction(item));
-                    leftPanel.appendChild(btn);
-                    if (i === 0) showAttraction(item);
-                });
-                attractionsModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-            }
-
-            // Kliknięcia w kafelki Kraków/Wieliczka
-            document.querySelectorAll('.location-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const city = card.getAttribute('data-location');
-                    openAttractionsModal(city);
-                });
-            });
-
-            // Zamykanie modala
-            closeModalBtn.addEventListener('click', () => {
-                attractionsModal.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            });
-
-            // Zamknięcie modala klawiszem Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && !attractionsModal.classList.contains('hidden')) {
-                    attractionsModal.classList.add('hidden');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-
         </script>
     </body>
 
